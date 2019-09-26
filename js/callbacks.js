@@ -27,3 +27,5 @@ function generateHTML(data) {
     <p>${data.extract}</p>
   `;
 }
+
+getJSON(astrosUrl)
