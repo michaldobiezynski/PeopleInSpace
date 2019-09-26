@@ -28,4 +28,5 @@ function generateHTML(data) {
   `;
 }
 
-getJSON(astrosUrl)
+btn.addEventListener('click', () => getJSON(astrosUrl));
+
