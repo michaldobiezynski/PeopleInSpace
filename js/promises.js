@@ -38,6 +38,9 @@ function generateHTML(data) {
 }
 
 btn.addEventListener('click', (event) => {
-  getJSON(astrosUrl, getProfiles);
+  getJSON(astrosUrl)
+      .then(getProfiles)
+      .then(data => console.log(data))
+      .catch( err => console.log(err));
   event.target.remove();
 });
