@@ -21,9 +21,10 @@ function getJSON(url) {
 }
 
 function getProfiles(json) {
-  json.people.map( person => {
-    getJSON(wikiUrl + person.name, generateHTML);      
-  }); 
+  const profiles = json.people.map( person => {
+    return getJSON(wikiUrl + person.name);
+  });
+  return profiles;
 }
 
 function generateHTML(data) {
