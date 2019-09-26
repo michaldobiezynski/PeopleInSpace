@@ -4,15 +4,17 @@ const peopleList = document.getElementById('people');
 const btn = document.querySelector('button');
 
 function getJSON(url, callback) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', url);
-  xhr.onload = () => {
-    if(xhr.status === 200) {
-      let data = JSON.parse(xhr.responseText);
-      return callback(data);
-    }
-  };
-  xhr.send();
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.onload = () => {
+      if(xhr.status === 200) {
+        let data = JSON.parse(xhr.responseText);
+        return callback(data);
+      }
+    };
+    xhr.send();
+  });
 }
 
 function getProfiles(json) {
