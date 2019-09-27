@@ -15,16 +15,16 @@ function getJSON(url) {
         reject(Error(xhr.statusText));
       }
     };
-    xhr.onerror(Error('A network error occurred.'));
+    xhr.onerror = () => (Error('A network error occurred.'));
     xhr.send();
   });
 }
 
-function getProfiles(json) {
+function getProfiles(data) {
   const profiles = json.people.map( person => {
     return getJSON(wikiUrl + person.name);
   });
-  return profiles;
+  return Promise.all(profiles);
 }
 
 function generateHTML(data) {
@@ -41,7 +41,7 @@ function generateHTML(data) {
 btn.addEventListener('click', (event) => {
   getJSON(astrosUrl)
       .then(getProfiles)
-      .then(data => console.log(data))
+      .then(generateHTML)
       .catch( err => console.log(err));
   event.target.remove();
 });
