@@ -28,15 +28,19 @@ function getProfiles(data) {
 }
 
 function generateHTML(data) {
-  const section = document.createElement('section');
-  peopleList.appendChild(section);
-  section.innerHTML = `
-    <img src=${data.thumbnail.source}>
-    <h2>${data.title}</h2>
-    <p>${data.description}</p>
-    <p>${data.extract}</p>
+  data.map( person => {
+    const section = document.createElement('section');
+    peopleList.appendChild(section);
+    section.innerHTML = `
+    <img src=${person.thumbnail.source}>
+    <h2>${person.title}</h2>
+    <p>${person.description}</p>
+    <p>${person.extract}</p>
   `;
-}
+  });
+  }
+
+
 
 btn.addEventListener('click', (event) => {
   getJSON(astrosUrl)
