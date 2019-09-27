@@ -4,9 +4,10 @@ const peopleList = document.getElementById('people');
 const btn = document.querySelector('button');
 
 
-function getProfiles(data) {
+function getProfiles(json) {
   const profiles = json.people.map( person => {
-    return getJSON(wikiUrl + person.name);
+    return fetch(wikiUrl + person.name)
+        .then(response => response.json())
   });
   return Promise.all(profiles);
 }
@@ -30,10 +31,11 @@ btn.addEventListener('click', (event) => {
   event.target.textContent = "Loading...";
 
   fetch(astrosUrl)
+      .then(response => response.json())
       .then(getProfiles)
       .then(generateHTML)
       .catch( err => {
-      peopleList.innerText = "<h3>Something went wrong!</h3>";
+      peopleList.innerText = '<h3>Something went wrong!</h3>';
         console.log(err)
       })
       .finally( () => event.target.remove())
