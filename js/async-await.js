@@ -5,7 +5,8 @@ const btn = document.querySelector('button');
 
 // Handle all fetch requests
 async function getPeopleInSpace(url) {
-   const peopleResponse = await fetch(url);
+   const peopleResponse = await fetch(url)
+       .catch(e => console.log('Error fetching data: ', e));
    const peopleJSON = await peopleResponse.json();
 
    const profiles = peopleJSON.people.map( async person => {
