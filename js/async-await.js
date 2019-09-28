@@ -34,7 +34,10 @@ function generateHTML(data) {
   });
 }
 
-btn.addEventListener('click', (event) => {
+btn.addEventListener('click', async (event) => {
   event.target.textContent = "Loading...";
 
+  const astros = await getPeopleInSpace(astrosUrl);
+  generateHTML(astros);
+  event.target.remove();
 });
