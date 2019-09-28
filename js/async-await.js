@@ -3,10 +3,18 @@ const wikiUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
 const peopleList = document.getElementById('people');
 const btn = document.querySelector('button');
 
+async function getJSON() {
+  try {
+    const response = await fetch(url);
+    return await response.json();
+  } catch(error) {
+
+  }
+}
+
 // Handle all fetch requests
 async function getPeopleInSpace(url) {
    const peopleResponse = await fetch(url)
-       .catch(e => console.log('Error fetching data: ', e));
    const peopleJSON = await peopleResponse.json();
 
    const profiles = peopleJSON.people.map( async person => {
